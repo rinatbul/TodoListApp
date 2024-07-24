@@ -1,0 +1,17 @@
+.filterButtons {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+
+  button {
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    background: #ddd;
+    border-radius: 4px;
+
+    &:hover {
+      background: #bbb;
+    }
+  }
+}

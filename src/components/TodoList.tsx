@@ -12,18 +12,24 @@ interface Todo {
 export const TodoList = () => {
     const [todos, setTodos] = useState<Todo[]>([]);
     const [filter, setFilter] = useState<string>('all');
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 
     useEffect(() => {
-        const storedTodos = JSON.parse(localStorage.getItem('todos') || '[]');
-        setTodos(storedTodos);
+        const storedTodos = localStorage.getItem('todos');
+        if (storedTodos) {
+            setTodos(JSON.parse(storedTodos));
+        }
+        setIsLoading(false);
     }, []);
 
     useEffect(() => {
-        localStorage.setItem('todos', JSON.stringify(todos));
-    }, [todos]);
+        if (!isLoading) {
+            localStorage.setItem('todos', JSON.stringify(todos));
+        }
+    }, [todos, isLoading]);
 
     const addTodo = (text: string) => {
-        setTodos([...todos, { text, completed: false }]);
+        setTodos([{ text, completed: false }, ...todos]);
     };
 
     const removeTodo = (index: number) => {

@@ -11,12 +11,12 @@ interface TodoItemProps {
 export const TodoItem = ({todo, index, removeTodo, toggleTodo}: TodoItemProps) => {
     return (
         <div className={styles.todoItem}>
-      <span
-          style={{textDecoration: todo.completed ? 'line-through' : 'none'}}
-          onClick={() => toggleTodo(index)}
-      >
-        {todo.text}
-      </span>
+            <input
+                type="checkbox"
+                checked={todo.completed}
+                onChange={() => toggleTodo(index)}
+            />
+            <span>{todo.text}</span>
             <button onClick={() => removeTodo(index)}>Удалить</button>
         </div>
     );
